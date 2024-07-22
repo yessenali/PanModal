@@ -16,6 +16,14 @@ public extension PanModalPresentable where Self: UIViewController {
     var topOffset: CGFloat {
         return topLayoutOffset + 21.0
     }
+    
+    var dragIndicatorTopOffset: CGFloat {
+        return 8
+    }
+  
+    var dragIndicatorSize: CGSize {
+        return PanModalPresentationController.Constants.dragIndicatorSize
+    }
 
     var shortFormHeight: PanModalHeight {
         return longFormHeight
@@ -27,8 +35,8 @@ public extension PanModalPresentable where Self: UIViewController {
             else { return .maxHeight }
 
         // called once during presentation and stored
-        scrollView.layoutIfNeeded()
-        return .contentHeight(scrollView.contentSize.height)
+        view.layoutIfNeeded()
+        return .contentHeight(scrollView.contentInset.top + scrollView.contentSize.height + scrollView.contentInset.bottom)
     }
 
     var cornerRadius: CGFloat {
@@ -69,8 +77,9 @@ public extension PanModalPresentable where Self: UIViewController {
         guard let scrollView = panScrollable
             else { return false }
 
+        view.layoutIfNeeded()
         scrollView.layoutIfNeeded()
-        return scrollView.contentSize.height > (scrollView.frame.height - bottomLayoutOffset)
+        return (scrollView.contentInset.top + scrollView.contentSize.height + scrollView.contentInset.bottom) > (scrollView.frame.height - bottomLayoutOffset)
     }
 
     var allowsDragToDismiss: Bool {

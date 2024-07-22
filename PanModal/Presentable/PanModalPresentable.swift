@@ -36,6 +36,18 @@ public protocol PanModalPresentable: AnyObject {
     var topOffset: CGFloat { get }
 
     /**
+     The size of the Drag Indicator.
+     Default size is the width: 36, height: 5.
+     */
+    var dragIndicatorSize: CGSize { get }
+
+    /**
+     The offset between the top of the pan modal container view.
+     Default value is the 8.
+     */
+    var dragIndicatorTopOffset: CGFloat { get }
+  
+    /**
      The height of the pan modal container view
      when in the shortForm presentation state.
 
